@@ -26,6 +26,16 @@
         .section-title {
             @apply text-4xl font-bold text-center mb-12 text-gray-800;
         }
+        /* Animation for fade-in effect */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-400 { animation-delay: 0.4s; }
     </style>
 </head>
 <body class="antialiased">
@@ -34,6 +44,7 @@
     <header class="bg-white shadow-sm py-4">
         <nav class="container mx-auto px-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-blue-600">Sirajul Salehin Durjoy</a>
+            <!-- Desktop Navigation -->
             <ul class="hidden md:flex space-x-6">
                 <li><a href="#hero" class="text-gray-600 hover:text-blue-600 transition duration-300">Home</a></li>
                 <li><a href="#features" class="text-gray-600 hover:text-blue-600 transition duration-300">Features</a></li>
@@ -41,10 +52,21 @@
                 <li><a href="#testimonials" class="text-gray-600 hover:text-blue-600 transition duration-300">Testimonials</a></li>
                 <li><a href="#contact" class="text-gray-600 hover:text-blue-600 transition duration-300">Contact</a></li>
             </ul>
-            <button class="md:hidden text-gray-600 hover:text-blue-600 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-blue-600 focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
         </nav>
+        <!-- Mobile Navigation (hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 shadow-md">
+            <ul class="flex flex-col items-center space-y-3">
+                <li><a href="#hero" class="block text-gray-700 hover:text-blue-600 transition duration-300 py-2">Home</a></li>
+                <li><a href="#features" class="block text-gray-700 hover:text-blue-600 transition duration-300 py-2">Features</a></li>
+                <li><a href="#about" class="block text-gray-700 hover:text-blue-600 transition duration-300 py-2">About Us</a></li>
+                <li><a href="#testimonials" class="block text-gray-700 hover:text-blue-600 transition duration-300 py-2">Testimonials</a></li>
+                <li><a href="#contact" class="block text-gray-700 hover:text-blue-600 transition duration-300 py-2">Contact</a></li>
+            </ul>
+        </div>
     </header>
 
     <!-- Hero Section -->
@@ -218,6 +240,27 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+
+                // Close mobile menu when a link is clicked
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
